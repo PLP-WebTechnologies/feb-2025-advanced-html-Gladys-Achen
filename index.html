@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Future: Interactive HTML5 Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-pink: #ff2ced;
+            --neon-purple: #9600ff;
+            --dark-bg: #0a0a1a;
+            --darker-bg: #050510;
+            --card-bg: rgba(15, 15, 40, 0.7);
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--dark-bg);
+            color: #e0e0ff;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 25% 25%, var(--neon-purple) 0%, transparent 20%),
+                radial-gradient(circle at 75% 75%, var(--neon-blue) 0%, transparent 20%);
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        h1 {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            animation: pulse 3s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px var(--neon-blue); }
+            50% { text-shadow: 0 0 20px var(--neon-blue), 0 0 30px var(--neon-purple); }
+            100% { text-shadow: 0 0 15px var(--neon-blue); }
+        }
+        
+        section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(150, 0, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(150, 0, 255, 0.4);
+        }
+        
+        h2 {
+            color: var(--neon-pink);
+            border-bottom: 2px solid var(--neon-purple);
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        
+        /* Roman Numeral List */
+        .cyber-list {
+            counter-reset: cyber-counter;
+            padding-left: 0;
+        }
+        
+        .cyber-list li {
+            position: relative;
+            list-style: none;
+            padding: 15px 15px 15px 60px;
+            margin-bottom: 10px;
+            background: rgba(10, 10, 30, 0.6);
+            border-left: 3px solid var(--neon-blue);
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .cyber-list li::before {
+            counter-increment: cyber-counter;
+            content: counter(cyber-counter, upper-roman);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--neon-purple);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+        
+        /* Image with Hover Effect */
+        .cyber-image {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 240, 252, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .cyber-image img {
+            display: block;
+            width: 100%;
+            transition: transform 0.5s;
+        }
+        
+        .cyber-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .cyber-image:hover img {
+            transform: scale(1.1);
+        }
+        
+        .cyber-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(150, 0, 255, 0.2), rgba(0, 240, 252, 0.2));
+            pointer-events: none;
+        }
+        
+        /* Cyberpunk Table */
+        .cyber-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 240, 252, 0.2);
+        }
+        
+        .cyber-table th {
+            background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+            color: var(--darker-bg);
+            font-family: 'Orbitron', sans-serif;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .cyber-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(0, 240, 252, 0.1);
+            background: rgba(20, 20, 50, 0.7);
+        }
+        
+        .cyber-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .cyber-table tr:hover td {
+            background: rgba(30, 30, 70, 0.9);
+        }
+        
+        /* Cyber Form */
+        .cyber-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: rgba(20, 20, 50, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .form-control::placeholder {
+            color: rgba(200, 200, 255, 0.5);
+        }
+        
+        fieldset {
+            border: 1px solid var(--neon-purple);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            grid-column: 1 / -1;
+        }
+        
+        legend {
+            color: var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+            padding: 0 10px;
+            font-size: 1.1rem;
+        }
+        
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input, .checkbox-option input {
+            margin-right: 8px;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .checkbox-option input {
+            border-radius: 4px;
+        }
+        
+        .radio-option input:checked::before, 
+        .checkbox-option input:checked::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+        }
+        
+        .checkbox-option input:checked::before {
+            border-radius: 2px;
+        }
+        
+        .radio-option label, .checkbox-option label {
+            color: #e0e0ff;
+            cursor: pointer;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+            color: var(--darker-bg);
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            grid-column: 1 / -1;
+            justify-self: center;
+            width: 200px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 240, 252, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: rgba(200, 200, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .cyber-form {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Neon Future: HTML5 Interactive Showcase</h1>
+    </header>
+
+    <main>
+        <section class="cyber-section">
+            <h2>Cyber Development Path</h2>
+            <ol class="cyber-list">
+                <li>Neon Grid Fundamentals</li>
+                <li>Quantum CSS Architecture</li>
+                <li>Holographic Interface Design</li>
+                <li>Neural Network Integration</li>
+                <li>Cyber Security Protocols</li>
+            </ol>
+        </section>
+
+        <section class="cyber-section">
+            <h2>Matrix Vision</h2>
+            <div class="cyber-image">
+                <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg" 
+                     alt="Futuristic digital code matrix" 
+                     title="Enter the Matrix">
+            </div>
+            <p style="text-align: center; font-style: italic;">Source: <a href="https://www.pexels.com/" target="_blank" style="color: var(--neon-blue);">Pexels.com</a></p>
+        </section>
+
+        <section class="cyber-section">
+            <h2>Cyber Contact Network</h2>
+            <table class="cyber-table">
+                <thead>
+                    <tr>
+                        <th>Agent</th>
+                        <th>Safehouse</th>
+                        <th>Comm Link</th>
+                        <th>Encrypted Channel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Neo</td>
+                        <td>Zion Outpost 7</td>
+                        <td>555-0101</td>
+                        <td>the_one@matrix.org</td>
+                    </tr>
+                    <tr>
+                        <td>Trinity</td>
+                        <td>Underground Bunker 12</td>
+                        <td>555-0102</td>
+                        <td>trinity@matrix.org</td>
+                    </tr>
+                    <tr>
+                        <td>Morpheus</td>
+                        <td>Nebuchadnezzar</td>
+                        <td>555-0103</td>
+                        <td>captain@matrix.org</td>
+                    </tr>
+                    <tr>
+                        <td>Niobe</td>
+                        <td>Logos Command</td>
+                        <td>555-0104</td>
+                        <td>niobe@matrix.org</td>
+                    </tr>
+                    <tr>
+                        <td>Seraph</td>
+                        <td>Oracle's Temple</td>
+                        <td>555-0105</td>
+                        <td>seraph@matrix.org</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="cyber-section">
+            <h2>Neural Network Registration</h2>
+            <form id="cyberForm" class="cyber-form" novalidate>
+                <div class="form-group">
+                    <label for="cyberName">Neural ID*</label>
+                    <input type="text" id="cyberName" name="cyberName" class="form-control"
+                           placeholder="Enter your neural identifier" 
+                           required minlength="3" maxlength="30"
+                           pattern="[A-Za-z0-9_]+">
+                </div>
+
+                <div class="form-group">
+                    <label for="cyberEmail">Quantum Mail*</label>
+                    <input type="email" id="cyberEmail" name="cyberEmail" class="form-control"
+                           placeholder="user@quantum.net" 
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cyberPass">Encryption Key*</label>
+                    <input type="password" id="cyberPass" name="cyberPass" class="form-control"
+                           placeholder="Create secure key (min 8 chars)" 
+                           required minlength="8" 
+                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                    <small style="color: var(--neon-blue);">Must contain: digit, uppercase, lowercase</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="cyberPassConfirm">Confirm Key*</label>
+                    <input type="password" id="cyberPassConfirm" name="cyberPassConfirm" class="form-control"
+                           placeholder="Re-enter your encryption key" 
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="activationDate">Activation Date*</label>
+                    <input type="date" id="activationDate" name="activationDate" class="form-control"
+                           required min="2023-01-01" max="2030-12-31">
+                </div>
+
+                <div class="form-group">
+                    <label for="cyberFaction">Faction</label>
+                    <select id="cyberFaction" name="cyberFaction" class="form-control">
+                        <option value="">Select your allegiance</option>
+                        <option value="zion">Zion Resistance</option>
+                        <option value="matrix">Matrix Program</option>
+                        <option value="merovingian">Merovingian's Crew</option>
+                        <option value="independent">Independent Operator</option>
+                    </select>
+                </div>
+
+                <fieldset>
+                    <legend>Neural Configuration</legend>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="configHuman" name="neuralConfig" value="human" checked>
+                            <label for="configHuman">Human</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="configCyborg" name="neuralConfig" value="cyborg">
+                            <label for="configCyborg">Cyborg</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="configAI" name="neuralConfig" value="ai">
+                            <label for="configAI">Pure AI</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Skill Matrix (Select all applicable)</legend>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="skillHack" name="skills" value="hacking">
+                            <label for="skillHack">Neural Hacking</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="skillCombat" name="skills" value="combat">
+                            <label for="skillCombat">Quantum Combat</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="skillPilot" name="skills" value="pilot">
+                            <label for="skillPilot">Hovercraft Pilot</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="skillCypher" name="skills" value="cypher">
+                            <label for="skillCypher">Data Cyphering</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label for="cyberBio">Neural Imprint</label>
+                    <textarea id="cyberBio" name="cyberBio" class="form-control" rows="5"
+                              placeholder="Upload your consciousness imprint..."></textarea>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="termsAgree" name="termsAgree" required>
+                        <label for="termsAgree">I accept the <a href="#" style="color: var(--neon-blue);">Neural Network Terms</a>*</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Initiate Upload</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 Neon Future Network | All neural rights reserved</p>
+        <p>Warning: Unauthorized access to this system is prohibited by quantum law</p>
+    </footer>
+
+    <script>
+        // Enhanced validation with cyber effects
+        document.getElementById('cyberForm').addEventListener('submit', function(e) {
+            const pass = document.getElementById('cyberPass');
+            const confirmPass = document.getElementById('cyberPassConfirm');
+            
+            if (pass.value !== confirmPass.value) {
+                e.preventDefault();
+                confirmPass.setCustomValidity('Encryption keys do not match');
+                confirmPass.reportValidity();
+                
+                // Cyberpunk effect
+                confirmPass.style.borderColor = 'red';
+                confirmPass.style.boxShadow = '0 0 10px red';
+                setTimeout(() => {
+                    confirmPass.style.borderColor = 'var(--neon-purple)';
+                    confirmPass.style.boxShadow = 'none';
+                }, 2000);
+            } else {
+                confirmPass.setCustomValidity('');
+            }
+            
+            // Add cyberpunk submission effect if valid
+            if (this.checkValidity()) {
+                e.preventDefault();
+                document.querySelector('.submit-btn').textContent = 'UPLOADING...';
+                document.querySelector('.submit-btn').style.background = 'linear-gradient(to right, #00ff00, #00cc00)';
+                
+                // Simulate upload process
+                setTimeout(() => {
+                    alert('Neural upload complete! Welcome to the network.');
+                    this.submit();
+                }, 2000);
+            }
+        });
+        
+        // Add cyberpunk focus effects
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.boxShadow = '0 0 15px var(--neon-blue)';
+                this.style.borderColor = 'var(--neon-blue)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.boxShadow = 'none';
+                this.style.borderColor = 'var(--neon-purple)';
+            });
+        });
+    </script>
+</body>
+</html>
